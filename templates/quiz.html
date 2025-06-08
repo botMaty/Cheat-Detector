@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سؤالات</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+
+  <div class="theme-toggle">
+    <button id="modeBtn" onclick="toggleTheme()">light</button>
+  </div>
+
+  <div class="question_container">
+    <div class="progress" id="progress"></div>
+    <div class="question" id="question">سؤال لود نمی‌شود...</div>
+    <textarea id="answer" placeholder="پاسخ خود را بنویسید..."></textarea>
+    <div class="question_buttons">
+      <button class="prev-btn" onclick="prevQuestion()">قبلی</button>
+      <button class="next-btn" id="next-btn" onclick="nextQuestion()">بعدی</button>
+    </div>
+  </div>
+
+  <script src="../static/js/script.js"></script>
+
+</body>
+
+</html>
