@@ -1,0 +1,218 @@
+:root {
+    --bg: #c9d6ff;
+    --card-bg: #ffffff;
+    --text: #000000;
+    --textarea-bg: #eee;
+    --border: #ccc;
+    --circle-empty: #999999;
+    --circle-done: #512da8;
+    --circle-current: #53bd57;
+    --button-prev: #512da8;
+    --button-next: #53bd57;
+    --mode-btn-bg: #fff;
+    --mode-btn-text: #333;
+}
+
+body.dark {
+    --bg: #1e1e1e;
+    --card-bg: #2a2a2a;
+    --text: #eee;
+    --textarea-bg: #333;
+    --border: #666;
+    --circle-empty: #555;
+    --circle-done: #d141ad;
+    --circle-current: #03dac6;
+    --button-prev: #d141ad;
+    --button-next: #03dac6;
+    --mode-btn-bg: #444;
+    --mode-btn-text: #eee;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Open Sans', sans-serif;
+}
+
+body {
+    background: var(--bg);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+    transition: background 0.4s ease, color 0.4s ease;
+    color: var(--text);
+}
+
+.question_container {
+    background-color: var(--card-bg);
+    border-radius: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
+    width: 500;
+    height: 350;
+    max-width: 100%;
+    min-width: 50%;
+    max-height: 100%;
+    min-height: 60%;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    transition: background-color 0.4s ease;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+.theme-toggle button {
+    background: var(--mode-btn-bg);
+    padding: 5px 14px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.35);
+    border-radius: 12px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--mode-btn-text);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    user-select: none;
+    font-weight: 600;
+}
+
+.theme-toggle button:hover {
+    filter: brightness(0.85);
+}
+
+.progress {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+.circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--circle-empty);
+    transition: 0.3s;
+}
+
+.done {
+    background-color: var(--circle-done);
+    border-color: var(--circle-done);
+}
+
+.current {
+    background-color: var(--circle-current);
+    border-color: var(--circle-current);
+}
+
+.question {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+    background-color: var(--textarea-bg);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    resize: vertical;
+    height: 200px;
+    margin-bottom: 15px;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    outline: none;
+}
+
+
+.question_buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+button {
+    font-size: 13px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    flex: 1;
+    transition: 0.3s;
+}
+
+.prev-btn {
+    background-color: var(--button-prev);
+    color: white;
+}
+
+.next-btn {
+    background-color: var(--button-next);
+    color: white;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+    opacity: 0.75;
+}
+
+.login_container {
+    background-color: var(--card-bg);
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    max-width: 100%;
+    min-height: 200px;
+    padding: 20px;
+    transition: 0.4s;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+input {
+    background-color: var(--textarea-bg);
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    width: 100%;
+    color: var(--text);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    direction: rtl;
+    text-align: right;
+}
+
+.login_button {
+    background-color: var(--button-prev);
+    color: white;
+    font-size: 13px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    flex: 1;
+    transition: 0.3s;
+}
+
+.login_button:hover {
+    opacity: 0.75;
+}
