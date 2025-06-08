@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>در حال آماده‌سازی آزمون...</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="login_container">
+        <form>
+            <h4>در حال ورود به آزمون...</h4>
+        </form>
+    </div>
+    <script>
+        // نگه داشتن تم فعلی
+        (function () {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark");
+            }
+        })();
+
+        // اینجا localStorage رو پاک می‌کنیم
+        localStorage.removeItem("currentIndex");
+        localStorage.removeItem("answers");
+        localStorage.removeItem("times");
+
+        // و بعد منتقل میشیم به صفحه quiz
+        window.location.href = "/quiz";
+    </script>
+</body>
+</html>
