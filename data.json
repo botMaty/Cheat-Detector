@@ -79,5 +79,59 @@
             "description": "",
             "time_taken": 4
         }
+    ],
+    "Amin": [
+        {
+            "qnumber": 1,
+            "description": "نمیدونم فک کنم تهران باشه، البته من طرفدار تراکتورم، یاشاسین آذربایجان\n",
+            "time_taken": 52
+        },
+        {
+            "qnumber": 2,
+            "description": "با توجه به دروس ریاضی ۱ و ۲ میشه ۹",
+            "time_taken": 53
+        },
+        {
+            "qnumber": 3,
+            "description": "هایپر تکست مارک آپ لنگوعج",
+            "time_taken": 53
+        },
+        {
+            "qnumber": 4,
+            "description": "۲۰۲۵",
+            "time_taken": 53
+        },
+        {
+            "qnumber": 5,
+            "description": "ماشین حساب",
+            "time_taken": 53
+        }
+    ],
+    "Mosi": [
+        {
+            "qnumber": 1,
+            "description": "Tehran",
+            "time_taken": 10
+        },
+        {
+            "qnumber": 2,
+            "description": "8",
+            "time_taken": 13
+        },
+        {
+            "qnumber": 3,
+            "description": "idk",
+            "time_taken": 17
+        },
+        {
+            "qnumber": 4,
+            "description": "2025",
+            "time_taken": 21
+        },
+        {
+            "qnumber": 5,
+            "description": "Pytohn3",
+            "time_taken": 25
+        }
     ]
 }

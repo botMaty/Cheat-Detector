@@ -54,7 +54,7 @@ function showQuestion() {
 function saveAnswer() {
     answers[currentIndex] = answerField.value;
     const now = new Date();
-    times[currentIndex] = now.getMinutes();
+    times[currentIndex] = now.getSeconds();
     localStorage.setItem('currentIndex', JSON.stringify(currentIndex));
     localStorage.setItem('answers', JSON.stringify(answers));
     localStorage.setItem('times', JSON.stringify(times));
