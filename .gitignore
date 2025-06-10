@@ -13,6 +13,9 @@ venv/
 data.json
 db.json
 
+# Logs
+logs/
+
 # IDEs and editors
 .idea/
 *.sublime-project
