@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 import json
 import os
+from flask_cors import CORS
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from difflib import SequenceMatcher
@@ -8,6 +9,7 @@ from sentence_transformers import SentenceTransformer
 
 DATA_FILE = 'data.json'
 app = Flask(__name__)
+CORS(app, resources={r"/cheat_detection": {"origins": ["http://localhost:5000", "http://127.0.0.1:5000"]}})  # Allow specific origins
 app.secret_key = "1234"
 
 @app.route("/")
@@ -220,6 +222,11 @@ def cheat_detection():
     all_pairs.sort(key=lambda x: x['overall_percentage'], reverse=True)
 
     return jsonify({'pairs': all_pairs})
+
+
+@app.route('/show_cheaters')
+def show_cheaters():
+    return render_template('cheaters.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
