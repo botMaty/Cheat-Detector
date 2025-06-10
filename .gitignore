@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+.env
+
+# Data files
+data.json
+db.json
+
+# IDEs and editors
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vscode/
+
+# Misc
+*.log
