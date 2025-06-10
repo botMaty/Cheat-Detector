@@ -1,0 +1,46 @@
+body {
+    background-color: #f8f9fa;
+}
+.table-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+.percentage-high {
+    color: #dc3545 !important;
+    background-color: #f8d7da !important;
+    font-weight: bold !important;
+}
+.percentage-medium {
+    color: #fd7e14 !important;
+    background-color: #fff3cd !important;
+}
+.percentage-low {
+    color: #28a745 !important;
+    background-color: #d4edda !important;
+}
+.percentage-no-cheat {
+    color: #007bff !important;
+    background-color: #cce5ff !important;
+}
+.loading-spinner {
+    display: none;
+}
+.error-message {
+    display: none;
+    color: #dc3545;
+}
+.question-details {
+    display: none;
+}
+.question-details.show {
+    display: table-row;
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+.toggle-details {
+    text-decoration: none;
+}
+.toggle-details:hover {
+    text-decoration: underline;
+}
