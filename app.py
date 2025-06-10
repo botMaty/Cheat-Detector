@@ -69,8 +69,11 @@ def load_data():
 
 @app.route('/cheat_detection')
 def cheat_detection():
-
-    data = load_data()
+    try:
+        with open('db.json', 'r') as f:
+            data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return jsonify({'error': 'No results data found'}), 404
 
     students = list(data.keys())
     if len(students) < 2:
@@ -93,6 +96,67 @@ def cheat_detection():
     sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
     tfidf_vectorizer = TfidfVectorizer(ngram_range=(1,3), stop_words='english')
 
+    def calculate_percentages(answers_comparison, max_time_threshold=10):
+        if not answers_comparison:
+            return 0.0, []
+        
+        sbert_scores = []
+        tfidf_scores = []
+        diff_scores = []
+        time_similarities = []
+        question_percentages = []
+        
+        weights = {
+            'sbert': 0.44,
+            'tfidf': 0.23,
+            'diff': 0.23,
+            'time': 0.1
+        }
+        
+        for comparison in answers_comparison:
+            sbert_score = comparison['cosine_similarity_sbert']
+            tfidf_score = comparison['cosine_similarity_tfidf']
+            diff_score = comparison['diff_similarity']
+            time_diff = comparison['time_difference']
+            
+            # Calculate time similarity
+            time_similarity = 0
+            if time_diff is not None:
+                time_similarity = max(0, 1 - (time_diff / max_time_threshold))
+            
+            # Calculate question-specific percentage
+            question_score = (
+                weights['sbert'] * sbert_score +
+                weights['tfidf'] * tfidf_score +
+                weights['diff'] * diff_score +
+                weights['time'] * time_similarity
+            )
+            question_percentage = round(question_score * 100, 2)
+            question_percentages.append(question_percentage)
+            
+            # Collect scores for overall percentage
+            sbert_scores.append(sbert_score)
+            tfidf_scores.append(tfidf_score)
+            diff_scores.append(diff_score)
+            if time_diff is not None:
+                time_similarities.append(time_similarity)
+        
+        # Calculate overall percentage
+        avg_sbert = sum(sbert_scores) / len(sbert_scores) if sbert_scores else 0
+        avg_tfidf = sum(tfidf_scores) / len(tfidf_scores) if tfidf_scores else 0
+        avg_diff = sum(diff_scores) / len(diff_scores) if diff_scores else 0
+        avg_time_similarity = sum(time_similarities) / len(time_similarities) if time_similarities else 0
+        
+        overall_score = (
+            weights['sbert'] * avg_sbert +
+            weights['tfidf'] * avg_tfidf +
+            weights['diff'] * avg_diff +
+            weights['time'] * avg_time_similarity
+        )
+        overall_percentage = round(overall_score * 100, 2)
+        
+        return overall_percentage, question_percentages
+
     all_pairs = []
     for i in range(len(students)):
         for j in range(i + 1, len(students)):
@@ -102,6 +166,8 @@ def cheat_detection():
             for qnum in question_numbers:
                 ans1 = str(answers[qnum][student1]).strip()
                 ans2 = str(answers[qnum][student2]).strip()
+
+
 
                 matcher = SequenceMatcher(None, ans1, ans2)
                 matching_blocks = [b for b in matcher.get_matching_blocks() if b.size > 0]
@@ -135,11 +201,23 @@ def cheat_detection():
                     'time_difference': time_diff
                 })
 
-            all_pairs.append({
+            # Calculate overall and question-specific percentages
+            overall_percentage, question_percentages = calculate_percentages(pair_details)
+            
+            # Add question_percentage to each question in pair_details
+            for idx, detail in enumerate(pair_details):
+                detail['question_cheating_percentage'] = question_percentages[idx]
+
+            pair_data = {
                 'student1': student1,
                 'student2': student2,
-                'answers_comparison': pair_details
-            })
+                'answers_comparison': pair_details,
+                'overall_percentage': overall_percentage
+            }
+            all_pairs.append(pair_data)
+
+    # Sort pairs by overall_percentage in descending order
+    all_pairs.sort(key=lambda x: x['overall_percentage'], reverse=True)
 
     return jsonify({'pairs': all_pairs})
 
